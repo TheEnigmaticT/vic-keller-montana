@@ -55,8 +55,62 @@
         .hero-content {
             position: relative;
             z-index: 3;
-            max-width: 800px;
+            width: 100%;
             padding: 120px 0 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; gap: 48px; }
+        }
+        .hero-text { max-width: 600px; }
+        .hero-video {
+            background: rgba(0,0,0,0.4);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .hero-video:hover {
+            border-color: var(--copper-light);
+            background: rgba(0,0,0,0.5);
+        }
+        .hero-video-inner {
+            text-align: center;
+            color: white;
+        }
+        .hero-video-play {
+            width: 80px;
+            height: 80px;
+            background: var(--copper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .hero-video:hover .hero-video-play {
+            transform: scale(1.1);
+            background: var(--copper-light);
+        }
+        .hero-video-play svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+            margin-left: 4px;
+        }
+        .hero-video-label {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 0.05em;
         }
         .hero-eyebrow {
             color: var(--copper-light);
@@ -240,15 +294,25 @@
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-eyebrow">EPIC Success Montana · Two Days · Twenty Founders</div>
-                <h1 class="serif">Be in the room with the man who's made it happen.</h1>
-                <p class="hero-subtitle">Again and again and again. Vic Keller has built a billion-dollar empire by creating and selling businesses that scale. Get two days to learn building what lasts—with someone who's done it 17 times.</p>
-                <div class="hero-stats">
-                    <div class="hero-stat"><div class="hero-stat-number">17</div><div class="hero-stat-label">Companies built</div></div>
-                    <div class="hero-stat"><div class="hero-stat-number">9</div><div class="hero-stat-label">Successful exits</div></div>
-                    <div class="hero-stat"><div class="hero-stat-number">3</div><div class="hero-stat-label">Sold to Berkshire Hathaway</div></div>
+                <div class="hero-text">
+                    <div class="hero-eyebrow">EPIC Success Montana · Two Days · Twenty Founders</div>
+                    <h1 class="serif">Be in the room with the man who's made it happen.</h1>
+                    <p class="hero-subtitle">Again and again and again. Vic Keller has built a billion-dollar empire by creating and selling businesses that scale. Get two days to learn building what lasts—with someone who's done it 17 times.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat"><div class="hero-stat-number">17</div><div class="hero-stat-label">Companies built</div></div>
+                        <div class="hero-stat"><div class="hero-stat-number">9</div><div class="hero-stat-label">Successful exits</div></div>
+                        <div class="hero-stat"><div class="hero-stat-number">3</div><div class="hero-stat-label">Sold to Berkshire Hathaway</div></div>
+                    </div>
+                    <a href="#apply" class="btn-primary">Apply for Your Seat</a>
                 </div>
-                <a href="#apply" class="btn-primary">Apply for Your Seat</a>
+                <div class="hero-video">
+                    <div class="hero-video-inner">
+                        <div class="hero-video-play">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="hero-video-label">Watch Vic's Message</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
