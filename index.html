@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC Success Montana | Vic Keller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --copper: #B87333;
+            --copper-light: #D4956A;
+            --ink: #1a1a1a;
+            --warm-white: #faf8f5;
+            --stone: #f5f3f0;
+            --text-secondary: #5a5a5a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--ink);
+            line-height: 1.6;
+            background: var(--warm-white);
+            overflow-x: hidden;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-parallax-bg {
+            position: absolute;
+            top: -30%;
+            left: 0;
+            right: 0;
+            height: 180%;
+            background: url('images/hero.jpg') center 30%/cover no-repeat;
+            will-change: transform;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(26,26,26,0.25) 0%, rgba(26,26,26,0.4) 50%, rgba(26,26,26,0.65) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 120px 0 80px;
+        }
+        .hero-eyebrow {
+            color: var(--copper-light);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            font-size: 0.875rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: rgba(255,255,255,0.92);
+            max-width: 600px;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+        .hero-stats { display: flex; gap: 48px; margin-bottom: 48px; flex-wrap: wrap; }
+        .hero-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--copper-light);
+            line-height: 1;
+        }
+        .hero-stat-label { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
+        .btn-primary {
+            display: inline-block;
+            background: var(--copper);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); }
+
+        /* PROBLEM */
+        .problem-section { padding: 120px 0; background: var(--ink); color: white; }
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        @media (max-width: 768px) { .problem-grid { grid-template-columns: 1fr; gap: 48px; } }
+        .problem-content h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 32px; line-height: 1.2; }
+        .problem-content p { font-size: 1.125rem; color: rgba(255,255,255,0.8); margin-bottom: 24px; line-height: 1.8; }
+        .problem-highlight { background: rgba(184, 115, 51, 0.15); border-left: 4px solid var(--copper); padding: 24px 32px; }
+        .problem-highlight p { color: white; font-size: 1.25rem; margin: 0; font-style: italic; }
+
+        /* PARALLAX BREAKER */
+        .parallax-breaker { position: relative; height: 50vh; min-height: 400px; overflow: hidden; }
+        .parallax-breaker-bg {
+            position: absolute;
+            top: -40%;
+            left: 0;
+            right: 0;
+            height: 200%;
+            background: url('images/mountains.jpg') center/cover no-repeat;
+            will-change: transform;
+        }
+        .parallax-breaker-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(26,26,26,0.15) 0%, rgba(26,26,26,0.05) 50%, rgba(26,26,26,0.2) 100%);
+        }
+
+        /* ALTITUDE */
+        .altitude-section { padding: 120px 0; background: var(--stone); }
+        .altitude-intro { max-width: 800px; margin-bottom: 80px; }
+        .altitude-intro h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 24px; line-height: 1.2; }
+        .altitude-intro p { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.8; }
+        .altitude-journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        .altitude-stage { background: white; padding: 40px; border-radius: 8px; border-top: 4px solid var(--copper); }
+        .altitude-stage-label { font-size: 0.75rem; color: var(--copper); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+        .altitude-stage h3 { font-size: 1.5rem; margin-bottom: 16px; }
+        .altitude-stage p { color: var(--text-secondary); line-height: 1.7; }
+
+        /* PEET */
+        .peet-section { padding: 120px 0; background: white; }
+        .peet-header { max-width: 700px; margin-bottom: 64px; }
+        .peet-header h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 24px; line-height: 1.2; }
+        .peet-header p { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8; }
+        .peet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        @media (max-width: 900px) { .peet-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .peet-grid { grid-template-columns: 1fr; } }
+        .peet-card { background: var(--stone); padding: 32px; border-radius: 8px; text-align: center; }
+        .peet-letter { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--copper); line-height: 1; margin-bottom: 16px; }
+        .peet-word { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; }
+        .peet-desc { color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; }
+
+        /* FORMULA */
+        .formula-section { padding: 120px 0; background: var(--ink); color: white; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; gap: 48px; } }
+        .formula-content h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: 24px; line-height: 1.2; }
+        .formula-content p { font-size: 1.125rem; color: rgba(255,255,255,0.8); margin-bottom: 20px; line-height: 1.8; }
+        .formula-equation { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 48px; text-align: center; }
+        .formula-equation-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--copper-light); margin-bottom: 24px; }
+        .formula-equation-text span { display: inline-block; margin: 0 8px; }
+        .formula-note { font-style: italic; color: rgba(255,255,255,0.6); font-size: 1.125rem; }
+
+        /* CONTRAST */
+        .contrast-section { padding: 120px 0; background: var(--warm-white); }
+        .contrast-header { text-align: center; max-width: 700px; margin: 0 auto 64px; }
+        .contrast-header h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 16px; }
+        .contrast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1000px; margin: 0 auto; }
+        @media (max-width: 768px) { .contrast-grid { grid-template-columns: 1fr; } }
+        .contrast-card { padding: 48px; border-radius: 12px; }
+        .contrast-card.typical { background: #f0f0f0; border: 2px solid #e0e0e0; }
+        .contrast-card.epic { background: var(--ink); color: white; border: 2px solid var(--copper); }
+        .contrast-card h3 { font-size: 1.5rem; margin-bottom: 32px; }
+        .contrast-card.typical h3 { color: var(--text-secondary); }
+        .contrast-card.epic h3 { color: var(--copper-light); }
+        .contrast-item { padding: 16px 0; border-bottom: 1px solid rgba(128,128,128,0.2); font-size: 1.0625rem; }
+        .contrast-card.typical .contrast-item { color: #666; }
+        .contrast-card.epic .contrast-item { color: rgba(255,255,255,0.9); }
+
+        /* TESTIMONIALS */
+        .testimonials-section { padding: 120px 0; background: var(--stone); }
+        .testimonials-header { text-align: center; margin-bottom: 64px; }
+        .testimonials-header h2 { font-size: clamp(2rem, 4vw, 2.75rem); }
+        .testimonial-featured { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: center; background: white; padding: 48px; border-radius: 12px; margin-bottom: 48px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        @media (max-width: 768px) { .testimonial-featured { grid-template-columns: 1fr; text-align: center; } }
+        .testimonial-image { width: 100%; aspect-ratio: 1; border-radius: 12px; object-fit: cover; }
+        .testimonial-content blockquote { font-size: 1.375rem; font-style: italic; line-height: 1.7; margin-bottom: 24px; color: var(--ink); }
+        .testimonial-author { font-weight: 600; font-size: 1.125rem; }
+        .testimonial-role { color: var(--text-secondary); font-size: 0.9375rem; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        @media (max-width: 900px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .testimonial-grid { grid-template-columns: 1fr; } }
+        .testimonial-card { background: white; padding: 32px; border-radius: 12px; }
+        .testimonial-card-image { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
+        .testimonial-card blockquote { font-size: 0.9375rem; font-style: italic; line-height: 1.7; margin-bottom: 20px; color: var(--ink); }
+        .testimonial-card-author { font-weight: 600; font-size: 0.9375rem; }
+        .testimonial-card-role { color: var(--text-secondary); font-size: 0.8125rem; }
+
+        /* FIRESIDE */
+        .fireside-section { position: relative; min-height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .fireside-parallax-bg {
+            position: absolute;
+            top: -40%;
+            left: 0;
+            right: 0;
+            height: 200%;
+            background: url('images/fireside.jpg') center 35%/cover no-repeat;
+            will-change: transform;
+            z-index: 1;
+        }
+        .fireside-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,26,26,0.35) 0%, rgba(26,26,26,0.45) 50%, rgba(26,26,26,0.55) 100%); z-index: 2; }
+        .fireside-content { position: relative; z-index: 3; max-width: 700px; text-align: center; color: white; padding: 80px 24px; }
+        .fireside-content h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 24px; line-height: 1.2; }
+        .fireside-content p { font-size: 1.25rem; color: rgba(255,255,255,0.92); line-height: 1.8; }
+
+        /* INVESTMENT */
+        .investment-section { padding: 120px 0; background: white; }
+        .investment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        @media (max-width: 768px) { .investment-grid { grid-template-columns: 1fr; gap: 48px; } }
+        .investment-content h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 24px; line-height: 1.2; }
+        .investment-content p { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8; }
+        .investment-card { background: var(--stone); padding: 48px; border-radius: 12px; text-align: center; border: 2px solid var(--copper); }
+        .investment-label { font-size: 0.875rem; color: var(--copper); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+        .investment-price { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--ink); line-height: 1; margin-bottom: 8px; }
+        .investment-detail { color: var(--text-secondary); margin-bottom: 32px; }
+        .investment-includes { text-align: left; margin-bottom: 32px; }
+        .investment-includes p { font-weight: 600; margin-bottom: 16px; color: var(--ink); }
+        .investment-includes ul { list-style: none; }
+        .investment-includes li { padding: 8px 0; color: var(--text-secondary); padding-left: 24px; position: relative; }
+        .investment-includes li::before { content: "✓"; position: absolute; left: 0; color: var(--copper); font-weight: bold; }
+
+        /* FOOTER */
+        .footer { padding: 48px 0; background: var(--ink); color: rgba(255,255,255,0.6); text-align: center; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-parallax-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-eyebrow">EPIC Success Montana · Two Days · Twenty Founders</div>
+                <h1 class="serif">Be in the room with the man who's made it happen.</h1>
+                <p class="hero-subtitle">Again and again and again. Vic Keller has built a billion-dollar empire by creating and selling businesses that scale. Get two days to learn building what lasts—with someone who's done it 17 times.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat"><div class="hero-stat-number">17</div><div class="hero-stat-label">Companies built</div></div>
+                    <div class="hero-stat"><div class="hero-stat-number">9</div><div class="hero-stat-label">Successful exits</div></div>
+                    <div class="hero-stat"><div class="hero-stat-number">3</div><div class="hero-stat-label">Sold to Berkshire Hathaway</div></div>
+                </div>
+                <a href="#apply" class="btn-primary">Apply for Your Seat</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <div class="problem-grid">
+                <div class="problem-content">
+                    <h2 class="serif">$5 million to $25 million is harder than zero to five.</h2>
+                    <p>Everyone talks about how to get started. How to get your first million. How to find product-market fit.</p>
+                    <p>But what happens after that? When the tactics that got you here start failing? When you've hired a team but they can't execute without you? When you're working harder than ever but growth has flatlined?</p>
+                    <p>The rules change at altitude. And most entrepreneurs are flying blind.</p>
+                </div>
+                <div class="problem-highlight">
+                    <p>"Every ceiling you hit is a people problem disguised as a process problem."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-breaker">
+        <div class="parallax-breaker-bg"></div>
+        <div class="parallax-breaker-overlay"></div>
+    </section>
+
+    <section class="altitude-section">
+        <div class="container">
+            <div class="altitude-intro">
+                <h2 class="serif">The altitude changes everything.</h2>
+                <p>Think of business growth like flying. At each altitude, the air is different. The instruments you need change. The skills that got you off the ground won't keep you at cruising altitude.</p>
+            </div>
+            <div class="altitude-journey">
+                <div class="altitude-stage"><div class="altitude-stage-label">Ground Level</div><h3 class="serif">$0 – $1M</h3><p>You're the engine. Every sale, every decision, every late night is you. This is where hustle matters most—and where most advice lives.</p></div>
+                <div class="altitude-stage"><div class="altitude-stage-label">Climb Phase</div><h3 class="serif">$1M – $5M</h3><p>You've proven the model. Now you need people. But hiring is hard, and delegation feels impossible when the business is your baby.</p></div>
+                <div class="altitude-stage"><div class="altitude-stage-label">The Transition Zone</div><h3 class="serif">$5M – $25M</h3><p>This is where most founders stall. The skills that built the business can't scale it. You need systems, leadership, and clarity on what actually moves the needle.</p></div>
+                <div class="altitude-stage"><div class="altitude-stage-label">Cruising Altitude</div><h3 class="serif">$25M+</h3><p>The business has its own momentum. It runs without you grinding daily. This is what Vic has built—17 times. This is what you'll learn.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="peet-section">
+        <div class="container">
+            <div class="peet-header">
+                <h2 class="serif">The PEET framework creates businesses with their own momentum.</h2>
+                <p>At EPIC Success, you'll learn and apply the framework Vic uses to build companies that scale—without burning out the founder. Four pillars that transform chaos into a machine.</p>
+            </div>
+            <div class="peet-grid">
+                <div class="peet-card"><div class="peet-letter">P</div><div class="peet-word">Predictable</div><div class="peet-desc">Revenue that doesn't surprise you. Systems that deliver consistent results.</div></div>
+                <div class="peet-card"><div class="peet-letter">E</div><div class="peet-word">Efficient</div><div class="peet-desc">Resources allocated where they multiply. No waste, no bloat.</div></div>
+                <div class="peet-card"><div class="peet-letter">E</div><div class="peet-word">Essential</div><div class="peet-desc">Doing what matters. Saying no to everything else. Ruthless focus.</div></div>
+                <div class="peet-card"><div class="peet-letter">T</div><div class="peet-word">Trusted</div><div class="peet-desc">Teams, partners, and customers who believe. Trust compounds.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="formula-section">
+        <div class="container">
+            <div class="formula-grid">
+                <div class="formula-content">
+                    <h2 class="serif">Sales is math before it's motivation.</h2>
+                    <p>Most founders think they have a sales problem. What they actually have is a clarity problem. They're pulling levers randomly, hoping something moves.</p>
+                    <p>In one session, you'll learn the simple equation that turns your sales challenges into a predictable, solvable formula. No more guessing. No more hoping.</p>
+                    <p>You don't double sales by working twice as hard. You do it by working smarter on the right multipliers.</p>
+                </div>
+                <div class="formula-equation">
+                    <div class="formula-equation-text"><span>Leads</span> × <span>Conversion</span> × <span>Deal Size</span> × <span>Retention</span></div>
+                    <p class="formula-note">"Effort alone is simple addition. Scale multiplies."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contrast-section">
+        <div class="container">
+            <div class="contrast-header"><h2 class="serif">This isn't a conference.</h2></div>
+            <div class="contrast-grid">
+                <div class="contrast-card typical">
+                    <h3 class="serif">Typical $15K Event</h3>
+                    <div class="contrast-item">2,000+ attendees in a convention center</div>
+                    <div class="contrast-item">Watch the speaker from row 47</div>
+                    <div class="contrast-item">Take notes you'll never review</div>
+                    <div class="contrast-item">Network with strangers between sessions</div>
+                    <div class="contrast-item">Fly home inspired but unchanged</div>
+                </div>
+                <div class="contrast-card epic">
+                    <h3 class="serif">EPIC Success Montana</h3>
+                    <div class="contrast-item">20 founders in a private residence</div>
+                    <div class="contrast-item">Work directly with Vic for two days</div>
+                    <div class="contrast-item">Apply frameworks to your actual business</div>
+                    <div class="contrast-item">Build relationships that last decades</div>
+                    <div class="contrast-item">Leave with a roadmap you'll actually use</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header"><h2 class="serif">What builders say</h2></div>
+            <div class="testimonial-featured">
+                <img src="images/dave-ramsey.webp" alt="Dave Ramsey" class="testimonial-image">
+                <div class="testimonial-content">
+                    <blockquote>"Real business people build, not theorize. Vic is a rare builder who serves entrepreneurs every day. I'm grateful for his friendship."</blockquote>
+                    <div class="testimonial-author">Dave Ramsey</div>
+                    <div class="testimonial-role">Bestselling Author, Host of The Ramsey Show (23M weekly listeners)</div>
+                </div>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img src="images/robert-kiyosaki.webp" alt="Robert Kiyosaki" class="testimonial-card-image">
+                    <blockquote>"Vic's a serial entrepreneur who can't help himself! He doesn't just build businesses, he builds clarity."</blockquote>
+                    <div class="testimonial-card-author">Robert Kiyosaki</div>
+                    <div class="testimonial-card-role">Author of Rich Dad Poor Dad</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="images/pace-morby.webp" alt="Pace Morby" class="testimonial-card-image">
+                    <blockquote>"One of the sharpest operators and business builders I've ever met. Every conversation is a masterclass."</blockquote>
+                    <div class="testimonial-card-author">Pace Morby</div>
+                    <div class="testimonial-card-role">Host of A&E's Triple Digit Flip</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="images/don-dicostanzo.webp" alt="Don DiCostanzo" class="testimonial-card-image">
+                    <blockquote>"Vic is my hero on multiple levels. Husband, father, leader, friend. I grab hold of any advice he offers."</blockquote>
+                    <div class="testimonial-card-author">Don DiCostanzo</div>
+                    <div class="testimonial-card-role">CEO of Pedego, EY Entrepreneur of the Year</div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="images/kelvin-beachum.webp" alt="Kelvin Beachum Jr" class="testimonial-card-image">
+                    <blockquote>"As a member of my personal board of directors, I have a front-row seat to his stellar leadership."</blockquote>
+                    <div class="testimonial-card-author">Kelvin Beachum Jr.</div>
+                    <div class="testimonial-card-role">NFL Pro, Walter Payton Man of the Year Nominee</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fireside-section">
+        <div class="fireside-parallax-bg"></div>
+        <div class="fireside-overlay"></div>
+        <div class="fireside-content">
+            <h2 class="serif">Where the noise stops.</h2>
+            <p>No hotel ballrooms. No vendor booths. Just a private Montana residence with chef-prepared meals, fireside conversations, and the space to think clearly. This is where your next chapter becomes visible.</p>
+        </div>
+    </section>
+
+    <section class="investment-section" id="apply">
+        <div class="container">
+            <div class="investment-grid">
+                <div class="investment-content">
+                    <h2 class="serif">This investment is a fraction of what you'll build.</h2>
+                    <p>At other events, $15,000 gets you a seat in a stadium. Here, it gets you two days of direct access to someone who's built and sold more businesses than most people will start.</p>
+                    <p>One insight that shifts your trajectory. One framework that unlocks your team. One relationship that opens doors for decades. The ROI isn't theoretical—it's what Vic has done 17 times.</p>
+                </div>
+                <div class="investment-card">
+                    <div class="investment-label">Investment</div>
+                    <div class="investment-price">$15,000</div>
+                    <div class="investment-detail">Two days · Twenty founders · One Montana retreat</div>
+                    <div class="investment-includes">
+                        <p>Your seat includes:</p>
+                        <ul>
+                            <li>Two full days with Vic Keller</li>
+                            <li>Private residence accommodations</li>
+                            <li>Chef-prepared meals</li>
+                            <li>PEET framework workshop</li>
+                            <li>Sales equation deep-dive</li>
+                            <li>One-on-one strategy session</li>
+                            <li>Lifetime access to the EPIC network</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary">Apply for Your Seat</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer"><div class="container"><p>© 2026 EPIC Success. All rights reserved.</p></div></footer>
+
+    <script>
+        const parallaxElements = [
+            { el: document.querySelector('.hero-parallax-bg'), speed: 0.4 },
+            { el: document.querySelector('.parallax-breaker-bg'), speed: 0.35 },
+            { el: document.querySelector('.fireside-parallax-bg'), speed: 0.35 }
+        ];
+        let ticking = false;
+        function updateParallax() {
+            const scrollY = window.pageYOffset;
+            parallaxElements.forEach(({ el, speed }) => {
+                if (!el) return;
+                const rect = el.parentElement.getBoundingClientRect();
+                if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                    const elementTop = rect.top + scrollY;
+                    const scrollRelative = scrollY - elementTop + window.innerHeight;
+                    el.style.transform = `translate3d(0, ${scrollRelative * speed * -0.5}px, 0)`;
+                }
+            });
+            ticking = false;
+        }
+        window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; } });
+        updateParallax();
+    </script>
+</body>
+</html>
